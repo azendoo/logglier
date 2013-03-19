@@ -65,13 +65,14 @@ module Logglier
           end
 
           at_exit {
-            exit!
+            stop
             join
+            exit!
           }
         end
 
         # Signals the queue that we're exiting
-        def exit!
+        def stop
           @exiting = true
           @queue.push :__delivery_thread_exit_signal__
         end
